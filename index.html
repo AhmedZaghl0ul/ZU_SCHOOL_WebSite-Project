@@ -9,16 +9,38 @@
     <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
 
     <style>
-      #webchat .bpWebchat {
-        position: unset;
-        width: 100%;
-        height: 100%;
-        max-height: 100%;
-        max-width: 100%;
-      }
-      #webchat .bpFab {
-        display: none; /* إخفاء الزر العائم */
-      }
+        /* 1. تنسيق الصندوق الذي سيحتوي البوت */
+        #webchat {
+            position: relative;
+            /* ضروري جداً */
+            width: 80%;
+            height: 600px;
+            margin: 0 auto;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            /* لضمان عدم خروج البوت من الحواف */
+        }
+
+        /* 2. إجبار البوت على التمدد ليملأ الصندوق */
+        .bp-widget-widget {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            box-shadow: none !important;
+            z-index: 1000;
+        }
+
+        /* إخفاء زر الفقاعة العائمة */
+        .bp-widget-side {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -55,9 +77,6 @@
             <h1>ZAGHLOUL UNIVERSITY</h1>
             <p>
                 Welcome to ZU School — a modern educational platform that brings together technology and learning.
-                At Zaghloul University, we offer high-quality virtual and real-world courses to empower students
-                in programming, artificial intelligence, mobile development, and more. Explore interactive classes,
-                discover expert-led content, and begin your learning journey with us today.
             </p>
         </article>
     </section>
@@ -66,30 +85,10 @@
         <h1 class="head">Choose Your Course</h1>
         <div class="courses-container">
             <div class="corcon">
-                <img src="photos/py.jpeg" class="divim">
                 <h1>Python Programming Course</h1>
-                <p id="divP">Python is a high-level, easy-to-learn, open-source, extensible, object-oriented programming
-                    language.</p>
+                <p>Python is a high-level, easy-to-learn programming language.</p>
             </div>
-            <div class="corcon">
-                <img src="photos/cpp.png" class="divim">
-                <h1>C++ Programming Course</h1>
-                <p id="divP">C++ is an object-oriented, multi-paradigm, compiled, statically typed programming language.
-                </p>
             </div>
-            <div class="corcon">
-                <img src="photos/flutter.png" class="divim">
-                <h1>Flutter Course</h1>
-                <p id="divP">Flutter is an open-source software development kit developed by Google for building user
-                    interfaces.</p>
-            </div>
-            <div class="corcon">
-                <img src="photos/AI.png" class="divim">
-                <h1>Introduction AI Course</h1>
-                <p id="divP">Artificial intelligence (AI) is a set of technologies that enable computers to perform a
-                    variety of advanced functions.</p>
-            </div>
-        </div>
     </section>
 
     <section id="contact">
@@ -106,15 +105,12 @@
 
     <section id="chat-section" style="padding: 40px 0; background-color: #f4f4f4; text-align: center;">
         <h1 class="head" style="color: #333; margin-bottom: 20px;">Ask ZU Assistant</h1>
-        <div id="webchat" style="width: 80%; height: 600px; margin: 0 auto; border: 2px solid #ddd; border-radius: 10px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+        <div id="webchat"></div>
     </section>
 
     <script src="main.js"></script>
 
     <script>
-        window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
-        });
         window.botpress.init({
             "botId": "01ead755-c8c9-4331-9ecd-abfcc4e9cb3e",
             "configuration": {
@@ -129,13 +125,20 @@
                 "feedbackEnabled": false,
                 "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
                 "soundEnabled": false,
-                "proactiveMessageEnabled": false,
-                "proactiveBubbleMessage": "Hi! 👋 Need help?",
-                "proactiveBubbleTriggerType": "afterDelay",
-                "proactiveBubbleDelayTime": 10
+                "proactiveMessageEnabled": false
             },
-            "clientId": "bf907469-153c-4eb3-957e-8707ec02db0c",
-            "selector": "#webchat"
+            "clientId": "bf907469-153c-4eb3-957e-8707ec02db0c"
+        });
+
+        window.botpress.on("webchat:ready", () => {
+            window.botpress.open();
+
+            const botElement = document.querySelector('.bp-widget-widget');
+            const myContainer = document.querySelector('#webchat');
+
+            if (botElement && myContainer) {
+                myContainer.appendChild(botElement);
+            }
         });
     </script>
 
