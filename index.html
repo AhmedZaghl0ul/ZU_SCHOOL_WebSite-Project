@@ -9,10 +9,9 @@
     <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
 
     <style>
-        /* 1. تنسيق الصندوق الذي سيحتوي البوت */
+        /* 1. تنسيق الحاوية (حسب التعليمات: يجب أن تكون relative) */
         #webchat {
-            position: relative;
-            /* ضروري جداً */
+            position: relative; /* أهم سطر لنجاح العملية */
             width: 80%;
             height: 600px;
             margin: 0 auto;
@@ -21,25 +20,24 @@
             background: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            /* لضمان عدم خروج البوت من الحواف */
         }
 
-        /* 2. إجبار البوت على التمدد ليملأ الصندوق */
-        .bp-widget-widget {
+        /* 2. إخفاء الزر العائم (الفقاعة) */
+        .bpFab {
+            display: none !important;
+        }
+
+        /* 3. تنسيق نافذة البوت لتملأ الحاوية (طبقا للتوثيق الرسمي) */
+        .bpWebchat {
             position: absolute !important;
             top: 0 !important;
             left: 0 !important;
+            bottom: 0 !important;
+            right: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            max-width: none !important;
-            max-height: none !important;
-            box-shadow: none !important;
-            z-index: 1000;
-        }
-
-        /* إخفاء زر الفقاعة العائمة */
-        .bp-widget-side {
-            display: none !important;
+            max-height: 100% !important;
+            margin: 0 !important;
         }
     </style>
 </head>
@@ -85,10 +83,26 @@
         <h1 class="head">Choose Your Course</h1>
         <div class="courses-container">
             <div class="corcon">
+                <img src="photos/py.jpeg" class="divim">
                 <h1>Python Programming Course</h1>
-                <p>Python is a high-level, easy-to-learn programming language.</p>
+                <p id="divP">Python is a high-level, easy-to-learn programming language.</p>
             </div>
+            <div class="corcon">
+                <img src="photos/cpp.png" class="divim">
+                <h1>C++ Programming Course</h1>
+                <p id="divP">C++ is an object-oriented, multi-paradigm, compiled, statically typed programming language.</p>
             </div>
+            <div class="corcon">
+                <img src="photos/flutter.png" class="divim">
+                <h1>Flutter Course</h1>
+                <p id="divP">Flutter is an open-source software development kit developed by Google.</p>
+            </div>
+            <div class="corcon">
+                <img src="photos/AI.png" class="divim">
+                <h1>Introduction AI Course</h1>
+                <p id="divP">Artificial intelligence (AI) is a set of technologies that enable computers to perform advanced functions.</p>
+            </div>
+        </div>
     </section>
 
     <section id="contact">
@@ -111,6 +125,11 @@
     <script src="main.js"></script>
 
     <script>
+        // استخدام الحدث الرسمي المذكور في التوثيق
+        window.botpress.on('webchat:initialized', () => {
+            window.botpress.open();
+        });
+
         window.botpress.init({
             "botId": "01ead755-c8c9-4331-9ecd-abfcc4e9cb3e",
             "configuration": {
@@ -125,20 +144,13 @@
                 "feedbackEnabled": false,
                 "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
                 "soundEnabled": false,
-                "proactiveMessageEnabled": false
+                "proactiveMessageEnabled": false,
+                // هذه الإعدادات تضمن تطبيق التنسيق الصحيح
+                "containerWidth": "100%",
+                "layoutWidth": "100%"
             },
-            "clientId": "bf907469-153c-4eb3-957e-8707ec02db0c"
-        });
-
-        window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
-
-            const botElement = document.querySelector('.bp-widget-widget');
-            const myContainer = document.querySelector('#webchat');
-
-            if (botElement && myContainer) {
-                myContainer.appendChild(botElement);
-            }
+            "clientId": "bf907469-153c-4eb3-957e-8707ec02db0c",
+            "selector": "#webchat" // تحديد الحاوية بدقة
         });
     </script>
 
