@@ -7,39 +7,6 @@
     <title>ZU</title>
 
     <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
-
-    <style>
-        /* 1. تنسيق الحاوية (حسب التعليمات: يجب أن تكون relative) */
-        #webchat {
-            position: relative; /* أهم سطر لنجاح العملية */
-            width: 80%;
-            height: 600px;
-            margin: 0 auto;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            background: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        /* 2. إخفاء الزر العائم (الفقاعة) */
-        .bpFab {
-            display: none !important;
-        }
-
-        /* 3. تنسيق نافذة البوت لتملأ الحاوية (طبقا للتوثيق الرسمي) */
-        .bpWebchat {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            bottom: 0 !important;
-            right: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            max-height: 100% !important;
-            margin: 0 !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -75,6 +42,9 @@
             <h1>ZAGHLOUL UNIVERSITY</h1>
             <p>
                 Welcome to ZU School — a modern educational platform that brings together technology and learning.
+                At Zaghloul University, we offer high-quality virtual and real-world courses to empower students
+                in programming, artificial intelligence, mobile development, and more. Explore interactive classes,
+                discover expert-led content, and begin your learning journey with us today.
             </p>
         </article>
     </section>
@@ -85,22 +55,26 @@
             <div class="corcon">
                 <img src="photos/py.jpeg" class="divim">
                 <h1>Python Programming Course</h1>
-                <p id="divP">Python is a high-level, easy-to-learn programming language.</p>
+                <p id="divP">Python is a high-level, easy-to-learn, open-source, extensible, object-oriented programming
+                    language.</p>
             </div>
             <div class="corcon">
                 <img src="photos/cpp.png" class="divim">
                 <h1>C++ Programming Course</h1>
-                <p id="divP">C++ is an object-oriented, multi-paradigm, compiled, statically typed programming language.</p>
+                <p id="divP">C++ is an object-oriented, multi-paradigm, compiled, statically typed programming language.
+                </p>
             </div>
             <div class="corcon">
                 <img src="photos/flutter.png" class="divim">
                 <h1>Flutter Course</h1>
-                <p id="divP">Flutter is an open-source software development kit developed by Google.</p>
+                <p id="divP">Flutter is an open-source software development kit developed by Google for building user
+                    interfaces.</p>
             </div>
             <div class="corcon">
                 <img src="photos/AI.png" class="divim">
                 <h1>Introduction AI Course</h1>
-                <p id="divP">Artificial intelligence (AI) is a set of technologies that enable computers to perform advanced functions.</p>
+                <p id="divP">Artificial intelligence (AI) is a set of technologies that enable computers to perform a
+                    variety of advanced functions.</p>
             </div>
         </div>
     </section>
@@ -117,42 +91,7 @@
         </form>
     </section>
 
-    <section id="chat-section" style="padding: 40px 0; background-color: #f4f4f4; text-align: center;">
-        <h1 class="head" style="color: #333; margin-bottom: 20px;">Ask ZU Assistant</h1>
-        <div id="webchat"></div>
-    </section>
-
     <script src="main.js"></script>
-
-    <script>
-        // استخدام الحدث الرسمي المذكور في التوثيق
-        window.botpress.on('webchat:initialized', () => {
-            window.botpress.open();
-        });
-
-        window.botpress.init({
-            "botId": "01ead755-c8c9-4331-9ecd-abfcc4e9cb3e",
-            "configuration": {
-                "version": "v2",
-                "fabImage": "https://files.bpcontent.cloud/2025/12/10/02/20251210022950-6ZDRV3QC.png",
-                "color": "#3276EA",
-                "variant": "solid",
-                "headerVariant": "glass",
-                "themeMode": "dark",
-                "fontFamily": "ADLaM Display",
-                "radius": 4,
-                "feedbackEnabled": false,
-                "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
-                "soundEnabled": false,
-                "proactiveMessageEnabled": false,
-                // هذه الإعدادات تضمن تطبيق التنسيق الصحيح
-                "containerWidth": "100%",
-                "layoutWidth": "100%"
-            },
-            "clientId": "bf907469-153c-4eb3-957e-8707ec02db0c",
-            "selector": "#webchat" // تحديد الحاوية بدقة
-        });
-    </script>
 
 </body>
 
