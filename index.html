@@ -17,7 +17,7 @@
         max-width: 100%;
       }
       #webchat .bpFab {
-        display: none; /* إخفاء الزر العائم لأن البوت مدمج في الصفحة */
+        display: none; /* إخفاء الزر العائم */
       }
     </style>
 </head>
@@ -104,7 +104,41 @@
         </form>
     </section>
 
+    <section id="chat-section" style="padding: 40px 0; background-color: #f4f4f4; text-align: center;">
+        <h1 class="head" style="color: #333; margin-bottom: 20px;">Ask ZU Assistant</h1>
+        <div id="webchat" style="width: 80%; height: 600px; margin: 0 auto; border: 2px solid #ddd; border-radius: 10px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
+    </section>
+
     <script src="main.js"></script>
+
+    <script>
+        window.botpress.on("webchat:ready", () => {
+            window.botpress.open();
+        });
+        window.botpress.init({
+            "botId": "01ead755-c8c9-4331-9ecd-abfcc4e9cb3e",
+            "configuration": {
+                "version": "v2",
+                "fabImage": "https://files.bpcontent.cloud/2025/12/10/02/20251210022950-6ZDRV3QC.png",
+                "color": "#3276EA",
+                "variant": "solid",
+                "headerVariant": "glass",
+                "themeMode": "dark",
+                "fontFamily": "ADLaM Display",
+                "radius": 4,
+                "feedbackEnabled": false,
+                "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+                "soundEnabled": false,
+                "proactiveMessageEnabled": false,
+                "proactiveBubbleMessage": "Hi! 👋 Need help?",
+                "proactiveBubbleTriggerType": "afterDelay",
+                "proactiveBubbleDelayTime": 10
+            },
+            "clientId": "bf907469-153c-4eb3-957e-8707ec02db0c",
+            "selector": "#webchat"
+        });
+    </script>
+
 </body>
 
 </html>
